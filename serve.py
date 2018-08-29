@@ -431,6 +431,14 @@ def library():
   ctx = default_context(papers, render_format='library', msg=msg)
   return render_template('main.html', **ctx)
 
+@app.route('/donate')
+def donate():
+  """ donation page """
+  papers = []
+  msg = 'Please donate!'
+  ctx = default_context(papers, render_format='donate', msg=msg)
+  return render_template('main.html', **ctx)
+
 @app.route('/libtoggle', methods=['POST'])
 def review():
   """ user wants to toggle a paper in his library """

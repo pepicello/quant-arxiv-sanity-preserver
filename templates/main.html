@@ -151,6 +151,7 @@ $(document).ready(function(){
   if( render_format === 'discussions') { d3.select('#tabdiscussions').classed('tab-selected', true); }
   if( render_format === 'recommend') { d3.select('#tabrec').classed('tab-selected', true); }
   if( render_format === 'library') { d3.select('#tablib').classed('tab-selected', true); }
+  if( render_format === 'donate') { d3.select('#tabdonate').classed('tab-selected', true); }
 
   $("#goaway").on('click', function(){
     $("#prompt").slideUp('fast');
@@ -218,6 +219,14 @@ $(document).ready(function(){
   <div id="search_hint"></div>
 </div>
 
+{% if show_prompt == "yes" %}
+<div id="prompt" style="background-color:#f6ff7a; padding:10px; width:980px; margin-left:auto; margin-right:auto; font-size:14px;">
+Hey there {{ g.user.username }}, sorry to interrupt. Quant-Arxiv-sanity costs a non-negligible amount of money to host.
+If you love the site, please consider donating under the donate tab.
+To nuke this message away for a long time click <span id="goaway" style="text-decoration: underline;cursor: pointer;">here</span>.
+</div>
+{% endif %}
+
 <div id="pagebar">
   <div class="pagelink" id="tabrecent"><a href="/">most recent</a></div>
   <div class="pagelink" id="tabtop"><a href="/top">top recent</a></div>
@@ -226,6 +235,7 @@ $(document).ready(function(){
   <div class="pagelink" id="tabdiscussions"><a href="/discussions">discussions</a></div>
   <div class="pagelink" id="tabrec"><a href="/recommend">recommended</a></div>
   <div class="pagelink" id="tablib"><a href="/library">library</a></div>
+  <div class="pagelink" id="tabdonate"><a href="/donate">donate</a></div>
 </div>
 
 <!-- this div will be rendered into dynamcially at init with JS -->
