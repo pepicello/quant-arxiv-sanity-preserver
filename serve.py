@@ -30,7 +30,7 @@ app.config.from_object(__name__)
 limiter = Limiter(app, global_limits=["100 per hour", "20 per minute"])
 
 # -----------------------------------------------------------------------------
-# utilities for database interactions 
+# utilities for database interactions
 # -----------------------------------------------------------------------------
 # to initialize the database: sqlite3 as.db < schema.sql
 def connect_db():
@@ -99,7 +99,7 @@ def papers_similar(pid):
   rawpid = strip_version(pid)
 
   # check if we have this paper at all, otherwise return empty list
-  if not rawpid in db: 
+  if not rawpid in db:
     return []
 
   # check if we have distances to this specific version of paper id (includes version)
@@ -107,7 +107,7 @@ def papers_similar(pid):
     # good, simplest case: lets return the papers
     return [db[strip_version(k)] for k in sim_dict[pid]]
   else:
-    # ok we don't have this specific version. could be a stale URL that points to, 
+    # ok we don't have this specific version. could be a stale URL that points to,
     # e.g. v1 of a paper, but due to an updated version of it we only have v2 on file
     # now. We want to use v2 in that case.
     # lets try to retrieve the most recent version of this paper we do have
@@ -138,7 +138,7 @@ def papers_from_svm(recent_days=None):
     uid = session['user_id']
     if not uid in user_sim:
       return []
-    
+
     # we want to exclude papers that are already in user library from the result, so fetch them.
     user_library = query_db('''select * from library where user_id = ?''', [uid])
     libids = {strip_version(x['paper_id']) for x in user_library}
@@ -154,7 +154,7 @@ def papers_from_svm(recent_days=None):
   return out
 
 def papers_filter_version(papers, v):
-  if v != '1': 
+  if v != '1':
     return papers # noop
   intv = int(v)
   filtered = [p for p in papers if p['_version'] == intv]
@@ -186,7 +186,7 @@ def encode_json(ps, n=10, send_images=True, send_abstracts=True):
     if send_images:
       struct['img'] = '/static/thumbs/' + idvv + '.pdf.jpg'
     struct['tags'] = [t['term'] for t in p['tags']]
-    
+
     # render time information nicely
     timestruct = dateutil.parser.parse(p['updated'])
     struct['published_time'] = '%s/%s/%s' % (timestruct.month, timestruct.day, timestruct.year)
@@ -336,7 +336,7 @@ def discussions():
 @app.route('/toggletag', methods=['POST'])
 def toggletag():
 
-  if not g.user: 
+  if not g.user:
     return 'You have to be logged in to tag. Sorry - otherwise things could get out of hand FAST.'
 
   # get the tag and validate it as an allowed tag
@@ -434,7 +434,7 @@ def library():
 @app.route('/libtoggle', methods=['POST'])
 def review():
   """ user wants to toggle a paper in his library """
-  
+
   # make sure user is logged in
   if not g.user:
     return 'NO' # fail... (not logged in). JS should prevent from us getting here.
@@ -473,7 +473,7 @@ def review():
 
 @app.route('/friends', methods=['GET'])
 def friends():
-    
+
     ttstr = request.args.get('timefilter', 'week') # default is week
     legend = {'day':1, '3days':3, 'week':7, 'month':30, 'year':365}
     tt = legend.get(ttstr, 7)
@@ -527,7 +527,7 @@ def account():
     # fetch all followers/following of the logged in user
     if g.user:
         username = get_username(session['user_id'])
-        
+
         following_db = list(follow_collection.find({ 'who':username }))
         for e in following_db:
             following.append({ 'user':e['whom'], 'active':e['active'] })
@@ -594,13 +594,13 @@ def addfollow():
             print('making active in follow collection:', delq)
             follow_collection.update_one(delq, {'$set':{'active':1}})
             return 'OK'
-        
+
     return 'NOTOK'
 
 @app.route('/login', methods=['POST'])
 def login():
   """ logs in the user. if the username doesn't exist creates the account """
-  
+
   if not request.form['username']:
     flash('You have to enter a username')
   elif not request.form['password']:
@@ -620,15 +620,15 @@ def login():
     # create account and log in
     creation_time = int(time.time())
     g.db.execute('''insert into user (username, pw_hash, creation_time) values (?, ?, ?)''',
-      [request.form['username'], 
-      generate_password_hash(request.form['password']), 
+      [request.form['username'],
+      generate_password_hash(request.form['password']),
       creation_time])
     user_id = g.db.execute('select last_insert_rowid()').fetchall()[0][0]
     g.db.commit()
 
     session['user_id'] = user_id
     flash('New account %s created' % (request.form['username'], ))
-  
+
   return redirect(url_for('intmain'))
 
 @app.route('/logout')
@@ -641,7 +641,7 @@ def logout():
 # int main
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
-   
+
   parser = argparse.ArgumentParser()
   parser.add_argument('-p', '--prod', dest='prod', action='store_true', help='run in prod?')
   parser.add_argument('-r', '--num_results', dest='num_results', type=int, default=200, help='number of results to return per query')
@@ -656,7 +656,7 @@ if __name__ == "__main__":
 
   print('loading the paper database', Config.db_serve_path)
   db = pickle.load(open(Config.db_serve_path, 'rb'))
-  
+
   print('loading tfidf_meta', Config.meta_path)
   meta = pickle.load(open(Config.meta_path, "rb"))
   vocab = meta['vocab']
@@ -669,7 +669,7 @@ if __name__ == "__main__":
   user_sim = {}
   if os.path.isfile(Config.user_sim_path):
     user_sim = pickle.load(open(Config.user_sim_path, 'rb'))
-  
+
   print('loading serve cache...', Config.serve_cache_path)
   cache = pickle.load(open(Config.serve_cache_path, "rb"))
   DATE_SORTED_PIDS = cache['date_sorted_pids']
@@ -693,7 +693,7 @@ if __name__ == "__main__":
   print('mongodb tags collection size:', tags_collection.count())
   print('mongodb goaway collection size:', goaway_collection.count())
   print('mongodb follow collection size:', follow_collection.count())
-  
+
   TAGS = ['insightful!', 'thank you', 'agree', 'disagree', 'not constructive', 'troll', 'spam']
 
   # start

@@ -185,13 +185,13 @@ $(document).ready(function(){
   </div>
 
   <!-- Site information/banner on top left -->
-	<a href="/">
-	<div id="tittxt">
-		<h1>Arxiv Sanity Preserver</h1>
-		Built in spare time by <a href="https://twitter.com/karpathy">@karpathy</a> to accelerate research.<br>
-		Serving last {{ totpapers }} papers from cs.[CV|CL|LG|AI|NE]/stat.ML
-	</div>
-	</a>
+  <a href="/">
+  <div id="tittxt">
+    <h1>Quant-Arxiv Sanity Preserver</h1>
+    Adapted in spare time by <a href="https://github.com/pepicello">@pepicello</a> from <a href="http://www.arxiv-sanity.com/">ASP</a> to accelerate research.<br>
+    Serving last {{ totpapers }} papers from q-fin.[PR|PM|TR|MF|CP|ST|GN]
+  </div>
+  </a>
 </div>
 
 <div id="flashesdiv">
@@ -222,7 +222,7 @@ $(document).ready(function(){
 
 {% if show_prompt == "yes" %}
 <div id="prompt" style="background-color:#f6ff7a; padding:10px; width:980px; margin-left:auto; margin-right:auto; font-size:14px;">
-Hey there {{ g.user.username }}, sorry to interrupt. Arxiv-sanity costs a non-negligible amount of money to host. 
+Hey there {{ g.user.username }}, sorry to interrupt. Arxiv-sanity costs a non-negligible amount of money to host.
 If you love the site, please consider pitching in:
   <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display:inline-block;">
   <input type="hidden" name="cmd" value="_s-xclick">
