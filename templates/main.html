@@ -24,8 +24,15 @@
 <script src="{{ url_for('static', filename='d3.min.js') }}"></script>
 <script src="{{ url_for('static', filename='as-common.js') }}"></script>
 
-<!-- Google Analytics JS -->
-<!-- Temp removed -->
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89127897-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89127897-2');
+</script>
 
 <script>
 
