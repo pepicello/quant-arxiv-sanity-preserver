@@ -437,7 +437,7 @@ def donate():
   papers = []
   msg = 'Please donate!'
   ctx = default_context(papers, render_format='donate', msg=msg)
-  return render_template('main.html', **ctx)
+  return render_template('donate.html', **ctx)
 
 @app.route('/libtoggle', methods=['POST'])
 def review():

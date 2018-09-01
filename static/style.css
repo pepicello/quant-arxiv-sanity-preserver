@@ -91,6 +91,14 @@ h1 {
 	background-color: white;
 }
 
+#donate {
+	background-color: #EEF;
+	padding: 10px;
+	border-radius: 10px;
+	margin-top: 2px;
+  text-align: center;
+}
+
 .apaper {
 	margin-top: 25px;
 	/* min-height: 300px; */
