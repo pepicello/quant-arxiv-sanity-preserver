@@ -1,9 +1,9 @@
 
-# arxiv sanity preserver
+# quant-arxiv sanity preserver
 
-This project is a web interface that attempts to tame the overwhelming flood of papers on Arxiv. It allows researchers to keep track of recent papers, search for papers, sort papers by similarity to any paper, see recent popular papers, to add papers to a personal library, and to get personalized recommendations of (new or old) Arxiv papers. This code is currently running live at [www.arxiv-sanity.com/](http://www.arxiv-sanity.com/), where it's serving 25,000+ Arxiv papers from Quantitative Finance and Machine Learning (q-fin.[PR|PM|TR|MF|CP|ST|GN]) over the last ~3 years. With this code base you could replicate the website to any of your favorite subsets of Arxiv by simply changing the categories in `fetch_papers.py`.
+This project is a web interface that attempts to tame the overwhelming flood of papers on Arxiv. It allows researchers to keep track of recent papers, search for papers, sort papers by similarity to any paper, see recent popular papers, to add papers to a personal library, and to get personalized recommendations of (new or old) Arxiv papers. This code is currently running live at [www.quant-arxiv-sanity.com/](http://www.quant-arxiv-sanity.com/), where it's serving Arxiv papers from Quantitative Finance and Machine Learning (q-fin.[PR|PM|TR|MF|CP|ST|GN]) over the last years. With this code base you could replicate the website to any of your favorite subsets of Arxiv by simply changing the categories in `fetch_papers.py`. This project and README.md is an adaptation from the original [arxiv sanity preserver](https://github.com/karpathy/arxiv-sanity-preserver) by [@karpathy](https://github.com/karpathy).
 
-![user interface](https://raw.github.com/karpathy/arxiv-sanity-preserver/master/ui.jpeg)
+![user interface](https://raw.github.com/pepicello/quant-arxiv-sanity-preserver/master/ui.png)
 
 ### Code layout
 
@@ -38,7 +38,7 @@ The processing pipeline requires you to run a series of scripts, and at this sta
 7. Run `make_cache.py` for various preprocessing so that server starts faster (and make sure to run `sqlite3 as.db < schema.sql` if this is the very first time ever you're starting arxiv-sanity, which initializes an empty database).
 8. Run the flask server with `serve.py`. Visit localhost:5000 and enjoy sane viewing of papers!
 
-Optionally you can also run the `twitter_daemon.py` in a screen session, which uses your Twitter API credentials (stored in `twitter.txt`) to query Twitter periodically looking for mentions of papers in the database, and writes the results to the pickle file `twitter.p`.
+<!-- Optionally you can also run the `twitter_daemon.py` in a screen session, which uses your Twitter API credentials (stored in `twitter.txt`) to query Twitter periodically looking for mentions of papers in the database, and writes the results to the pickle file `twitter.p`. -->
 
 I have a simple shell script that runs these commands one by one, and every day I run this script to fetch new papers, incorporate them into the database, and recompute all tfidf vectors/classifiers. More details on this process below.
 
