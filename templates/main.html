@@ -91,7 +91,6 @@ $(document).ready(function(){
   if(render_format === 'top') { link_endpoint = 'top'; }
   if(render_format === 'recommend') { link_endpoint = 'recommend'; }
   if(render_format === 'friends') { link_endpoint = 'friends'; }
-  if(render_format === 'toptwtr') { link_endpoint = 'toptwtr'; }
   if(render_format === 'discussions') { link_endpoint = 'discussions'; }
 
   var time_ranges = ['day', '3days', 'week', 'month', 'year', 'alltime'];
@@ -146,7 +145,6 @@ $(document).ready(function(){
   // in top tab: color current choice
   if( render_format === 'recent') { d3.select('#tabrecent').classed('tab-selected', true); }
   if( render_format === 'top') { d3.select('#tabtop').classed('tab-selected', true); }
-  if( render_format === 'toptwtr') { d3.select('#tabtwtr').classed('tab-selected', true); }
   if( render_format === 'friends') { d3.select('#tabfriends').classed('tab-selected', true); }
   if( render_format === 'discussions') { d3.select('#tabdiscussions').classed('tab-selected', true); }
   if( render_format === 'recommend') { d3.select('#tabrec').classed('tab-selected', true); }
@@ -230,7 +228,6 @@ To nuke this message away for a long time click <span id="goaway" style="text-de
 <div id="pagebar">
   <div class="pagelink" id="tabrecent"><a href="/">most recent</a></div>
   <div class="pagelink" id="tabtop"><a href="/top">top recent</a></div>
-  <div class="pagelink" id="tabtwtr"><a href="/toptwtr">top hype</a></div>
   <div class="pagelink" id="tabfriends"><a href="/friends">friends</a></div>
   <div class="pagelink" id="tabdiscussions"><a href="/discussions">discussions</a></div>
   <div class="pagelink" id="tabrec"><a href="/recommend">recommended</a></div>
